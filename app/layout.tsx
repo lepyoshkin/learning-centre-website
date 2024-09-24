@@ -1,13 +1,26 @@
 import type {Metadata} from 'next';
-import localFont from 'next/font/local';
 import './globals.css';
-import {Header} from '@/app/components/header';
-import {Footer} from '@/app/components/footer';
+import {Poppins, Patrick_Hand, Inter} from 'next/font/google';
+import {Header} from '@/components/header';
+import {Footer} from '@/components/footer';
+import {Sidebar} from '@/components/sidebar';
 
-const patrickHand = localFont({
-  src: './fonts/Patrick_Hand/PatrickHand-Regular.ttf',
-  variable: '--font-patrick-hand',
-  weight: '400',
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  weight: ['400'],
+});
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  variable: '--font-poppins',
+  weight: ['400'],
+});
+
+const patrickHand = Patrick_Hand({
+  subsets: ['latin'],
+  variable: '--font-patrickHand',
+  weight: ['400'],
 });
 
 export const metadata: Metadata = {
@@ -22,9 +35,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={` ${patrickHand.variable} antialiased`}>
+      <body
+        className={`${inter.variable}  ${poppins.variable} ${patrickHand.variable}`}
+      >
         <Header />
-        <main className="container mx-auto"> {children}</main>
+        <Sidebar className="hidden" />
+        <main>{children}</main>
         <Footer />
       </body>
     </html>
